@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
+// TODO refactor into widgets seprately
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
