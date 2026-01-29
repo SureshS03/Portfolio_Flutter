@@ -13,9 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Suresh Portfolio',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
       home: const HomePage(),
     );
   }
