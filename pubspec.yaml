@@ -63,6 +63,9 @@ flutter:
   assets:
     - assets/hero-arrow.svg
     - assets/profile.jpg
+    - assets/github-icon.svg
+    - assets/github-icon.png
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
