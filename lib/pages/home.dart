@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio/widgets/textwidget.dart';
 import 'package:portfolio/widgets/title.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:html' as html;
 
 // TODO refactor into widgets seprately
 // Scroller
@@ -11,6 +13,18 @@ import 'package:portfolio/widgets/title.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  Future<void> sendEmail() async {
+    final url =
+        'https://mail.google.com/mail/?view=cm&fs=1&to=suthamani51@gmail.com&su=Hello&body=Hi there';
+
+    html.window.open(url, '_blank');
+  }
+
+  Future<void> openUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    await launchUrl(uri);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,8 +155,10 @@ class HomePage extends StatelessWidget {
               _hero(context),
               _about(context),
               _exp(context),
+              _fproject(context),
+
               Container(
-                color: Color(0xffF2F2F2),
+                color: Colors.white,
                 padding: EdgeInsets.symmetric(
                   vertical: MediaQuery.of(context).size.height * 0.15,
                   horizontal: MediaQuery.of(context).size.height * 0.20,
@@ -150,254 +166,168 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    TitleWithDivider(title: "Featured Project"),
+                    TitleWithDivider(title: "Contact"),
                     SizedBox(height: 30),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            height: 300,
-                            width: 300,
-                            color: Colors.blue,
-                          ),
+                    SizedBox(height: 25),
+                    TextWidget(
+                      size: 16,
+                      name:
+                          "I am currently seeking employment, and I would appreciate it if you could contact me with any available job opportunities.",
+                      weight: FontWeight.w500,
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () async {
+                        await sendEmail();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        overlayColor: Colors.transparent,
+                        backgroundColor: Colors.white,
+                        padding: EdgeInsets.all(6),
+                        elevation: 0.0,
+                        shadowColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(8),
                         ),
-                        SizedBox(width: 15),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Encrypted Chunk Mailer",
-                                style: GoogleFonts.inter(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                "This open-source project enables users to split files into encrypted chunks using AES-GCM, transmit them via Gmail, and reconstruct them securely. It effectively bypasses traditional email size limits and allows your Gmail account to function as a private, secure cloud.",
-                                style: GoogleFonts.inter(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Divider(thickness: 1, color: Color(0xff1F1F1F)),
-                              SizedBox(height: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      TextWidget(
-                                        size: 14,
-                                        name: "GoLang",
-                                        weight: FontWeight.w400,
-                                      ),
-                                      SizedBox(width: 8),
-                                      TextWidget(
-                                        size: 14,
-                                        name: "Google Cloud",
-                                        weight: FontWeight.w400,
-                                      ),
-                                      SizedBox(width: 8),
-                                      TextWidget(
-                                        size: 14,
-                                        name: "SMTP",
-                                        weight: FontWeight.w400,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  IconButton(
-                                    onPressed: () {},
-                                    style: IconButton.styleFrom(
-                                      overlayColor: Colors.transparent,
-                                      backgroundColor: Color(0xffF2F2F2),
-                                      //padding: EdgeInsets.all(6),
-                                      elevation: 0.0,
-                                      //shadowColor: Colors.transparent,
-                                    ),
-                                    icon: Image.asset("assets/github-icon.png"),
-                                  ),
-                                ],
-                              ),
-                            ],
+                        side: BorderSide(color: Colors.grey),
+                      ),
+                      child: Text(
+                        "Write me",
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          color: Color(0xff1F1F1F),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 40),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            openUrl("https://github.com/SureshS03/");
+                          },
+                          style: IconButton.styleFrom(
+                            overlayColor: Colors.transparent,
+                            backgroundColor: Color(0xffF2F2F2),
+                            //padding: EdgeInsets.all(6),
+                            elevation: 0.0,
+                            //shadowColor: Colors.transparent,
                           ),
+                          icon: Image.asset("assets/github-icon.png"),
+                        ),
+                        SizedBox(width: 10),
+                        IconButton(
+                          onPressed: () async {
+                            openUrl("https://www.linkedin.com/in/sureshs03/");
+                          },
+                          style: IconButton.styleFrom(
+                            overlayColor: Colors.transparent,
+                            backgroundColor: Color(0xffF2F2F2),
+                            //padding: EdgeInsets.all(6),
+                            elevation: 0.0,
+                            //shadowColor: Colors.transparent,
+                          ),
+                          icon: Image.asset("assets/linkedin-icon.png"),
                         ),
                       ],
                     ),
-
-                    SizedBox(height: 30),
-
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Prod Grade Backend",
-                                style: GoogleFonts.inter(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                "GoConnect is a production-ready backend I built to deeply understand how to design and develop backend services from scratch using raw HTTP without any frameworks. Through this project, I gained strong skills in building scalable systems, implementing secure authentication, handling large user workloads, and applying DevOps best practices using Docker, Kubernetes, and CI/CD pipelines.",
-                                style: GoogleFonts.inter(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Divider(thickness: 1, color: Color(0xff1F1F1F)),
-                              SizedBox(height: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      TextWidget(
-                                        size: 14,
-                                        name: "GoLang",
-                                        weight: FontWeight.w400,
-                                      ),
-                                      SizedBox(width: 8),
-                                      TextWidget(
-                                        size: 14,
-                                        name: "Docker",
-                                        weight: FontWeight.w400,
-                                      ),
-                                      SizedBox(width: 8),
-                                      TextWidget(
-                                        size: 14,
-                                        name: "Kubernetes",
-                                        weight: FontWeight.w400,
-                                      ),
-                                      SizedBox(width: 8,),
-                                      TextWidget(
-                                        size: 14,
-                                        name: "Github Actions",
-                                        weight: FontWeight.w400,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  IconButton(
-                                    onPressed: () {},
-                                    style: IconButton.styleFrom(
-                                      overlayColor: Colors.transparent,
-                                      backgroundColor: Color(0xffF2F2F2),
-                                      //padding: EdgeInsets.all(6),
-                                      elevation: 0.0,
-                                      //shadowColor: Colors.transparent,
-                                    ),
-                                    icon: Image.asset("assets/github-icon.png"),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 15),
-
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            height: 300,
-                            width: 300,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ],
+                    SizedBox(height: 15),
+                    TextWidget(
+                      size: 14,
+                      name: "Suresh S - 2026",
+                      weight: FontWeight.w400,
                     ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-                    SizedBox(height: 30,),
-
-                    Row(
+  Container _fproject(BuildContext context) {
+    return Container(
+      color: Color(0xffF2F2F2),
+      padding: EdgeInsets.symmetric(
+        vertical: MediaQuery.of(context).size.height * 0.15,
+        horizontal: MediaQuery.of(context).size.height * 0.20,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          TitleWithDivider(title: "Featured Project"),
+          SizedBox(height: 30),
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(height: 300, width: 300, color: Colors.blue),
+              ),
+              SizedBox(width: 15),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Encrypted Chunk Mailer",
+                      style: GoogleFonts.inter(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "This open-source project enables users to split files into encrypted chunks using AES-GCM, transmit them via Gmail, and reconstruct them securely. It effectively bypasses traditional email size limits and allows your Gmail account to function as a private, secure cloud.",
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Divider(thickness: 1, color: Color(0xff1F1F1F)),
+                    SizedBox(height: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            height: 300,
-                            width: 300,
-                            color: Colors.blue,
-                          ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            TextWidget(
+                              size: 14,
+                              name: "GoLang",
+                              weight: FontWeight.w400,
+                            ),
+                            SizedBox(width: 8),
+                            TextWidget(
+                              size: 14,
+                              name: "Google Cloud",
+                              weight: FontWeight.w400,
+                            ),
+                            SizedBox(width: 8),
+                            TextWidget(
+                              size: 14,
+                              name: "SMTP",
+                              weight: FontWeight.w400,
+                            ),
+                          ],
                         ),
-                        SizedBox(width: 15),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Private Net",
-                                style: GoogleFonts.inter(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                "Hosted Private VPN, Proxy, AdBlocker Network lvl, Firewall, Music platform",
-                                style: GoogleFonts.inter(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Divider(thickness: 1, color: Color(0xff1F1F1F)),
-                              SizedBox(height: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      TextWidget(
-                                        size: 14,
-                                        name: "GoLang",
-                                        weight: FontWeight.w400,
-                                      ),
-                                      SizedBox(width: 8),
-                                      TextWidget(
-                                        size: 14,
-                                        name: "Google Cloud",
-                                        weight: FontWeight.w400,
-                                      ),
-                                      SizedBox(width: 8),
-                                      TextWidget(
-                                        size: 14,
-                                        name: "SMTP",
-                                        weight: FontWeight.w400,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10,),
-                                  IconButton(
-                                    onPressed: () {},
-                                    style: IconButton.styleFrom(
-                                      overlayColor: Colors.transparent,
-                                      backgroundColor: Color(0xffF2F2F2),
-                                      //padding: EdgeInsets.all(6),
-                                      elevation: 0.0,
-                                      //shadowColor: Colors.transparent,
-                                    ),
-                                    icon: Image.asset("assets/github-icon.png"),
-                                  ),
-                                ],
-                              ),
-                            ],
+                        SizedBox(height: 10),
+                        IconButton(
+                          onPressed: () async {
+                            openUrl("https://github.com/SureshS03/");
+                          },
+                          style: IconButton.styleFrom(
+                            overlayColor: Colors.transparent,
+                            backgroundColor: Color(0xffF2F2F2),
+                            //padding: EdgeInsets.all(6),
+                            elevation: 0.0,
+                            //shadowColor: Colors.transparent,
                           ),
+                          icon: Image.asset("assets/github-icon.png"),
                         ),
                       ],
                     ),
@@ -406,7 +336,172 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-        ),
+
+          SizedBox(height: 30),
+
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Prod Grade Backend",
+                      style: GoogleFonts.inter(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "GoConnect is a production-ready backend I built to deeply understand how to design and develop backend services from scratch using raw HTTP without any frameworks. Through this project, I gained strong skills in building scalable systems, implementing secure authentication, handling large user workloads, and applying DevOps best practices using Docker, Kubernetes, and CI/CD pipelines.",
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Divider(thickness: 1, color: Color(0xff1F1F1F)),
+                    SizedBox(height: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            TextWidget(
+                              size: 14,
+                              name: "GoLang",
+                              weight: FontWeight.w400,
+                            ),
+                            SizedBox(width: 8),
+                            TextWidget(
+                              size: 14,
+                              name: "Docker",
+                              weight: FontWeight.w400,
+                            ),
+                            SizedBox(width: 8),
+                            TextWidget(
+                              size: 14,
+                              name: "Kubernetes",
+                              weight: FontWeight.w400,
+                            ),
+                            SizedBox(width: 8),
+                            TextWidget(
+                              size: 14,
+                              name: "Github Actions",
+                              weight: FontWeight.w400,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          onPressed: () async {
+                            openUrl("https://github.com/SureshS03/");
+                          },
+                          style: IconButton.styleFrom(
+                            overlayColor: Colors.transparent,
+                            backgroundColor: Color(0xffF2F2F2),
+                            //padding: EdgeInsets.all(6),
+                            elevation: 0.0,
+                            //shadowColor: Colors.transparent,
+                          ),
+                          icon: Image.asset("assets/github-icon.png"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 15),
+
+              Expanded(
+                flex: 1,
+                child: Container(height: 300, width: 300, color: Colors.blue),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 30),
+
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(height: 300, width: 300, color: Colors.blue),
+              ),
+              SizedBox(width: 15),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Private Net",
+                      style: GoogleFonts.inter(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Hosted Private VPN, Proxy, AdBlocker Network lvl, Firewall, Music platform",
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Divider(thickness: 1, color: Color(0xff1F1F1F)),
+                    SizedBox(height: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            TextWidget(
+                              size: 14,
+                              name: "Microsoft Azure",
+                              weight: FontWeight.w400,
+                            ),
+                            SizedBox(width: 8),
+                            TextWidget(
+                              size: 14,
+                              name: "Networking",
+                              weight: FontWeight.w400,
+                            ),
+                            SizedBox(width: 8),
+                            TextWidget(
+                              size: 14,
+                              name: "Proxy",
+                              weight: FontWeight.w400,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          onPressed: () async {
+                            openUrl("https://github.com/SureshS03/");
+                          },
+                          style: IconButton.styleFrom(
+                            overlayColor: Colors.transparent,
+                            backgroundColor: Color(0xffF2F2F2),
+                            //padding: EdgeInsets.all(6),
+                            elevation: 0.0,
+                            //shadowColor: Colors.transparent,
+                          ),
+                          icon: Image.asset("assets/github-icon.png"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
