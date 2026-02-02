@@ -8,7 +8,6 @@ import 'dart:html' as html;
 
 // TODO refactor into widgets seprately
 // Scroller
-//Remaining part
 // Lastly for phone
 
 class HomePage extends StatelessWidget {
